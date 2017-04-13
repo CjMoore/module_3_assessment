@@ -35,18 +35,20 @@ describe "get show" do
     item = JSON.parse(response.body)
 
     expect(response.status).to eq(200)
-    expect(item["created_at"]).to be_falsy
-    expect(item["updated_at"]).to be_falsy
     expect(item["name"]).to eq(item1.name)
     expect(item["image_url"]).to eq(item1.image_url)
     expect(item["description"]).to eq(item1.description)
     expect(item["name"]).to_not eq(item2.name)
+    expect(item["created_at"]).to be_falsy
+    expect(item["updated_at"]).to be_falsy
   end
 end
 
 describe "delete item" do
   it "a user can delete item by sending a delete request to /api/v1/items/:id" do
     item1 = Item.create(name: "item1", description: "its a thing", image_url: "http://www.fillmurray.com/200/300")
+
+    expect(Item.all.count).to eq(1)
 
     delete "/api/v1/items/#{item1.id}"
 
