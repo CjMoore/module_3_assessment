@@ -60,12 +60,11 @@ end
 
 describe "post item" do
   it "a user can create an item with a post request to /api/v1/items" do
-    item ={ item: {name: "item1", description: "its a thing"}}
+    item ={ item: {name: "item1", description: "its a thing" , image_url: "http://www.fillmurray.com/200/300"}}
 
     expect(Item.all.count).to eq(0)
 
-    post '/api/v1/items', {item: {name: "item1", description: "its a thing", image_url: "http://www.fillmurray.com/200/300"}}
-
+    post '/api/v1/items', item
 
     item = Item.all.last
 
