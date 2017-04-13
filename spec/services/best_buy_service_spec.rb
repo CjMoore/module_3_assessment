@@ -8,7 +8,7 @@ describe BestBuyService do
         stores = serv.find_stores("80202")
         store = stores.first
 
-        expect(stores.count).to eq(10)
+        expect(stores.count).to eq(16)
         expect(store.keys).to include(:name)
         expect(store.keys).to include(:city)
         expect(store.keys).to include(:distance)

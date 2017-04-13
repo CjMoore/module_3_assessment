@@ -6,9 +6,12 @@ describe "when user inputs a zip into the search bar" do
 
     visit root_path
 
-    fill_in :search, with: zip 
-    click_on "Search"
+    fill_in :search, with: zip
+    VCR.use_cassette("/services/find_stores") do
+      click_on "Search"
+    end
 
     expect(current_path).to eq("/search")
+    
   end
 end

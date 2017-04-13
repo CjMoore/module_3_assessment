@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>Number of Stores: <%= @stores.count %></h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Store Name</th>
+            <th>City</th>
+            <th>Distance</th>
+            <th>Phone</th>
+            <th>Store Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @stores.each do |store| %>
+            <tr>
+              <td><%= store.name %></td>
+              <td><%= store.city %></td>
+              <td><%= store.distance %></td>
+              <td><%= store.phone %></td>
+              <td><%= store.store_type %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
