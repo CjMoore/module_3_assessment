@@ -76,6 +76,7 @@ describe "post item" do
     expect(item.name).to eq("item1")
     expect(item.description).to eq("its a thing")
     expect(item.image_url).to eq("http://www.fillmurray.com/200/300")
+    expect(json_response["name"]).to eq(item.name)
     expect(json_response["created_at"]).to be_falsy
     expect(json_response["updated_at"]).to be_falsy
   end
