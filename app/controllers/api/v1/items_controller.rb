@@ -1,5 +1,5 @@
 class Api::V1::ItemsController < ApplicationController
-  skip_before_filter :verigy_authenticity_token, if: :json_request?
+  skip_before_action :verify_authenticity_token
 
   def index
     render status: 200, json: Item.all, only: [:name, :description, :image_url]
@@ -22,6 +22,10 @@ class Api::V1::ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:name, :image_url, :description)
+  end
+
+  def json_request?
+    request.format.json?
   end
 
 end
