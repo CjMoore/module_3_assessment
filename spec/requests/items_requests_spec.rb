@@ -3,8 +3,8 @@ require "rails_helper"
 
 describe "get index" do
   it "when user requests get at /api/v1/items they are returned a list of all items" do
-    item1 = Item.create(name: "item1", description: "its a thing")
-    item2 = Item.create(name: "item2", description: "its another thing")
+    item1 = Item.create(name: "item1", description: "its a thing", image_url: "http://www.fillmurray.com/200/300")
+    item2 = Item.create(name: "item2", description: "its another thing", image_url: "http://www.fillmurray.com/200/300")
 
     get '/api/v1/items'
 
@@ -15,15 +15,18 @@ describe "get index" do
 
     expect(response.status).to eq(200)
     expect(items.count).to eq(2)
-    expect(item["name"]).to eq("item1")
-    expect(item["description"]).to eq("its a thing")
+    expect(item["name"]).to eq(item1.name)
+    expect(item["description"]).to eq(item1.description)
+    expect(item["image_url"]).to eq(item1.image_url)
+    expect(item["created_at"]).to be_falsy
+    expect(item["updated_at"]).to be_falsy
   end
 end
 
 describe "get show" do
   it "when user visits /api/v1/items/:id they are returned the data for that item" do
-    item1 = Item.create(name: "item1", description: "its a thing")
-    item2 = Item.create(name: "item2", description: "its another thing")
+    item1 = Item.create(name: "item1", description: "its a thing", image_url: "http://www.fillmurray.com/200/300")
+    item2 = Item.create(name: "item2", description: "its another thing", image_url: "http://www.fillmurray.com/200/300")
 
     get "/api/v1/items/#{item1.id}"
 
@@ -32,7 +35,10 @@ describe "get show" do
     item = JSON.parse(response.body)
 
     expect(response.status).to eq(200)
+    expect(item["created_at"]).to be_falsy
+    expect(item["updated_at"]).to be_falsy
     expect(item["name"]).to eq(item1.name)
+    expect(item["image_url"]).to eq(item1.image_url)
     expect(item["description"]).to eq(item1.description)
     expect(item["name"]).to_not eq(item2.name)
   end
@@ -47,5 +53,15 @@ describe "delete item" do
     expect(response).to be_success
     expect(response.status).to eq(204)
     expect(Item.all.count).to eq(0)
+  end
+end
+
+describe "post item" do
+  it "a user can create an item with a post request to /api/v1/items" do
+    item_params = {name: "item1", description: "its a thing"}
+
+    post '/api/v1/items', params: item_params
+
+    expect(response).to be_success
   end
 end
