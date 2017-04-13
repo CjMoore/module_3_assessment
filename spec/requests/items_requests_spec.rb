@@ -13,6 +13,7 @@ describe "get index" do
     items = JSON.parse(response.body)
     item = JSON.parse(response.body).first
 
+    expect(response.status).to eq(200)
     expect(items.count).to eq(2)
     expect(item["name"]).to eq("item1")
     expect(item["description"]).to eq("its a thing")
@@ -30,8 +31,21 @@ describe "get show" do
 
     item = JSON.parse(response.body)
 
+    expect(response.status).to eq(200)
     expect(item["name"]).to eq(item1.name)
     expect(item["description"]).to eq(item1.description)
     expect(item["name"]).to_not eq(item2.name)
+  end
+end
+
+describe "delete item" do
+  it "a user can delete item by sending a delete request to /api/v1/items/:id" do
+    item1 = Item.create(name: "item1", description: "its a thing")
+
+    delete "/api/v1/items/#{item1.id}"
+
+    expect(response).to be_success
+    expect(response.status).to eq(204)
+    expect(Item.all.count).to eq(0)
   end
 end
