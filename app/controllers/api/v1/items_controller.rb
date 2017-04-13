@@ -21,7 +21,6 @@ class Api::V1::ItemsController < ApplicationController
   private
 
   def item_params
-    byebug
     params.require(:item).permit(:name, :image_url, :description)
   end
 

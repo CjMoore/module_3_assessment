@@ -63,7 +63,6 @@ describe "post item" do
     post '/api/v1/items', {item: {name: "item1", description: "its a thing", image_url: "http://www.fillmurray.com/200/300"}}
 
     item = Item.all.last
-    byebug
 
     json_response = JSON.parse(response.body)
 
