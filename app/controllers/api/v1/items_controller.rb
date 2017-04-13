@@ -2,11 +2,11 @@ class Api::V1::ItemsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    render status: 200, json: Item.all, only: [:name, :description, :image_url]
+    render status: 200, json: Item.all, except: [:created_at, :updated_at]
   end
 
   def show
-    render status: 200, json: Item.find(params[:id]), only: [:name, :description, :image_url]
+    render status: 200, json: Item.find(params[:id]), except: [:created_at, :updated_at]
   end
 
   def destroy
@@ -15,7 +15,7 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def create
-    render status: 201, json: Item.create(item_params), only: [:name, :description, :image_url]
+    render status: 201, json: Item.create(item_params), except: [:created_at, :updated_at]
   end
 
   private
