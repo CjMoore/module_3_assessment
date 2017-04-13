@@ -46,7 +46,7 @@ end
 
 describe "delete item" do
   it "a user can delete item by sending a delete request to /api/v1/items/:id" do
-    item1 = Item.create(name: "item1", description: "its a thing")
+    item1 = Item.create(name: "item1", description: "its a thing", image_url: "http://www.fillmurray.com/200/300")
 
     delete "/api/v1/items/#{item1.id}"
 
@@ -60,9 +60,19 @@ describe "post item" do
   it "a user can create an item with a post request to /api/v1/items" do
     item ={ item: {name: "item1", description: "its a thing"}}
 
-    post '/api/v1/items', params: item
+    post '/api/v1/items', {item: {name: "item1", description: "its a thing", image_url: "http://www.fillmurray.com/200/300"}}
+
+    item = Item.all.last
+    byebug
+
+    json_response = JSON.parse(response.body)
 
     expect(response).to be_success
     expect(response.status).to eq(201)
+    expect(item.name).to eq("item1")
+    expect(item.description).to eq("its a thing")
+    expect(item.image_url).to eq("http://www.fillmurray.com/200/300")
+    expect(json_response["created_at"]).to be_falsy
+    expect(json_response["updated_at"]).to be_falsy
   end
 end
