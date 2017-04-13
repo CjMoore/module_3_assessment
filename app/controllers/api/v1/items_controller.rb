@@ -14,4 +14,14 @@ class Api::V1::ItemsController < ApplicationController
     render nothing: true, status: 204
   end
 
+  def create
+    render status: 201, json: Item.create(item_params), only: [:name, :description, :image_url]
+  end
+
+  private
+
+  def item_params
+    params.require(:item).permit(:name, :description, :image_url)
+  end
+
 end

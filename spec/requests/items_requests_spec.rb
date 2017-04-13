@@ -58,10 +58,11 @@ end
 
 describe "post item" do
   it "a user can create an item with a post request to /api/v1/items" do
-    item_params = {name: "item1", description: "its a thing"}
+    item ={ item: {name: "item1", description: "its a thing"}}
 
-    post '/api/v1/items', params: item_params
+    post '/api/v1/items', params: item
 
     expect(response).to be_success
+    expect(response.status).to eq(201)
   end
 end
