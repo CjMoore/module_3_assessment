@@ -1,6 +1,5 @@
 require "rails_helper"
 
-
 describe "get index" do
   it "when user requests get at /api/v1/items they are returned a list of all items" do
     item1 = Item.create(name: "item1", description: "its a thing", image_url: "http://www.fillmurray.com/200/300")
