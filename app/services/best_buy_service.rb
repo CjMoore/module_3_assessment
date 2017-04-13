@@ -1,7 +1,7 @@
 class BestBuyService
 
   def find_stores(zip)
-    parse(HTTParty.get("https://api.bestbuy.com/v1/stores(area(#{zip},25))?format=json&show=name,storeType,distance,city,phone&apiKey=#{ENV['API_KEY']}"))
+    parse(HTTParty.get("https://api.bestbuy.com/v1/stores(area(#{zip},25))?format=json&show=longName,storeType,distance,city,phone&apiKey=#{ENV['API_KEY']}"))
   end
 
   private

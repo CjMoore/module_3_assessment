@@ -9,7 +9,7 @@ class Store
               :total
 
   def initialize(store_data)
-    @name = store_data[:name]
+    @name = store_data[:longName]
     @city = store_data[:city]
     @distance = store_data[:distance]
     @phone = store_data[:phone]

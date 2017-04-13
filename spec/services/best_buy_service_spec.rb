@@ -13,7 +13,7 @@ describe BestBuyService do
 
         expect(total).to eq(16)
         expect(stores.count).to eq(10)
-        expect(store.keys).to include(:name)
+        expect(store.keys).to include(:longName)
         expect(store.keys).to include(:city)
         expect(store.keys).to include(:distance)
         expect(store.keys).to include(:phone)
