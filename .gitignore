@@ -17,5 +17,7 @@
 /tmp
 /lor
 
+/spec/cassettes
+
 # Ignore application configuration
 /config/application.yml
