@@ -1,6 +1,7 @@
 class Store
 
-  attr_reader :name,
+  attr_reader :service,
+              :name,
               :city,
               :distance,
               :phone,
@@ -15,12 +16,17 @@ class Store
     @store_type = store_data[:storeType]
   end
 
+  def self.serv
+    @service ||= BestBuyService.new
+  end
+
   def self.create(zip)
-    serv = BestBuyService.new
-    return_data = serv.find_stores(zip)
-    @total = return_data[:total]
-    return_data[:stores].map do |store_data|
+    serv.find_stores(zip)[:stores].map do |store_data|
       Store.new(store_data)
     end
+  end
+
+  def self.total(zip)
+    serv.find_stores(zip)[:total]
   end
 end
