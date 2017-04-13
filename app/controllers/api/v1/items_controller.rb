@@ -23,9 +23,4 @@ class Api::V1::ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:name, :image_url, :description)
   end
-
-  def json_request?
-    request.format.json?
-  end
-
 end

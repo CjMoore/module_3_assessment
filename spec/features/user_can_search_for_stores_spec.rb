@@ -17,7 +17,13 @@ describe "when user inputs a zip into the search bar" do
       expect(page).to have_content("Name")
       expect(page).to have_content("City")
       expect(page).to have_content("Distance")
+      expect(page).to have_content("Phone")
+      expect(page).to have_content("Store Type")
       expect(page).to have_content("BEST BUY MOBILE - CHERRY CREEK SHOPPING CENTER")
+      expect(page).to have_content("Mobile SAS")
+      expect(page).to have_content(3.45)
+      expect(page).to have_content("DENVER")
+      expect(page).to have_content("303-270-9189")
       expect(page).to have_content("BEST BUY - SOUTHGLENN")
     end
   end
